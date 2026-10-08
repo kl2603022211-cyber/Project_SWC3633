@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - UPTM Portal</title>
+    <!-- Import Font Montserrat & Open Sans (Mirip Canva Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Open+Sans:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --bg-image: url('green2.jpg'); 
+            --card-bg: #ff00ea; /* Warna kuning mengikut gambar */
+            --accent-yellow: #774100; 
+            --text-dark: #000000;
+            --text-light: #ffffff;
+            --title-blue: #32323a; /* Warna biru tajuk seperti dalam gambar */
+        }
+
+        body { 
+            font-family: 'Montserrat', 'Open Sans', sans-serif; 
+            margin: 0; 
+            padding: 40px 20px; 
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #1a0033; 
+            color: var(--text-light); 
+        }
+
+        .container { 
+            max-width: 950px; 
+            margin: 0 auto; 
+        }
+
+        /* --- TAJUK ANIMASI ATAS --- */
+        .marquee-title {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .marquee-title h1 {
+            display: inline-block;
+            color: #ffffff;
+            font-size: 28px; 
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin: 0;
+            animation: moveSmooth 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveSmooth {
+            0% {
+                transform: translateX(-10%);
+            }
+            100% {
+                transform: translateX(10%);
+            }
+        }
+
+        /* --- KOTAK KARTU UTAMA --- */
+        .card { 
+            background: var(--card-bg); 
+            padding: 40px 45px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
+            margin-bottom: 25px; 
+        }
+
+        /* --- STYLE TAJUK (CANVA SANS STYLE) --- */
+        .card h3, .card h4 { 
+            margin-top: 0; 
+            color: var(--title-blue); /* Warna biru terang/gelap Canva */
+            font-family: 'Montserrat', 'Open Sans', sans-serif; /* Mirip Canva Sans */
+            font-size: 26px;
+            font-weight: 800; /* Bold seperti di Canva */
+            letter-spacing: -0.5px;
+            margin-bottom: 20px; 
+            line-height: 1.2;
+        }
+
+        .auth-container { 
+            max-width: 550px; 
+            margin: 40px auto; 
+        }
+
+        input { 
+            box-sizing: border-box; 
+            width: 100%; 
+            padding: 16px 18px; 
+            margin: 8px 0 20px 0; 
+            border: 1px solid #ccc; 
+            border-radius: 10px; 
+            font-size: 16px; 
+            background: #ffffff; 
+            color: var(--text-dark); 
+            transition: all 0.2s; 
+            font-family: inherit;
+        }
+
+        input:focus { 
+            outline: none; 
+            border-color: var(--title-blue); 
+            box-shadow: 0 0 0 4px rgba(0, 51, 170, 0.2); 
+        }
+
+        button { 
+            width: 100%; 
+            padding: 16px; 
+            background: #e67e22; 
+            color: #ffffff; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 16px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            font-family: inherit;
+        }
+
+        button:hover { 
+            filter: brightness(1.1);
+            transform: translateY(-2px); 
+        }
+
+        .logout-btn { 
+            max-width: 180px; 
+            background: #ef4444; 
+            color: #ffffff;
+            font-size: 14px;
+            padding: 12px;
+        }
+
+        .logout-btn:hover { 
+            background: #dc2626; 
+        }
+
+        .hidden { 
+            display: none; 
+        }
+
+        hr { 
+            border: 0; 
+            border-top: 2px solid rgba(0,0,0,0.1); 
+            margin: 25px 0; 
+        }
+
+        ul { 
+            padding: 0; 
+            margin: 0; 
+            list-style: none; 
+        }
+
+        li { 
+            background: #ffffff; 
+            color: var(--text-dark);
+            padding: 18px 24px; 
+            border-radius: 12px; 
+            margin-bottom: 12px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        .pdf-btn { 
+            background: #d97706; 
+            color: white; 
+            font-weight: 800; 
+            margin-bottom: 25px; 
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3); 
+        }
+
+        .pdf-btn:hover { 
+            background: #b45309; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- TAJUK ANIMASI BERGERAK -->
+        <div class="marquee-title">
+            <h1>👨‍🎓 Student Personal Command Deck</h1>
+        </div>
+        
+        <!-- 1. Authentication -->
+        <div id="login-card" class="card auth-container">
+            <h3>Portal Student Authentication</h3>
+            <input type="email" id="email" value="ali@student.uptm.edu.my">
+            <input type="password" id="password" value="hashed_student_pass">
+            <button onclick="handleLogin()">Secure Login</button>
+            <p id="auth-feedback" style="color:#ef4444; font-size:14px; margin-top:10px; font-weight:700;"></p>
+        </div>
+
+        <!-- 2. Main Dashboard -->
+        <div id="dashboard-card" class="card hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0;">Welcome Student: <span id="user-name" style="color: #00ff2a;;"></span></h3>
+                <button onclick="location.reload()" class="logout-btn">Terminate Session</button>
+            </div>
+            <hr>
+            
+            <h4>📄 Advanced Document Utility Actions</h4>
+            <button onclick="downloadPdf()" class="pdf-btn">📥 Download Official Registration PDF Exam Slip</button>
+            
+            <h4>Your Personal Published Academic Performance</h4>
+            <ul id="student-results-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:3000/api"; 
+        let token = "";
+
+        async function handleLogin() {
+            const res = await fetch(`${API_URL}/auth/login`, { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' }, 
+                body: JSON.stringify({
+                    email: document.getElementById('email').value, 
+                    password: document.getElementById('password').value
+                }) 
+            });
+            const data = await res.json();
+            if(res.ok && data.user.role === 'Student') {
+                token = data.token; 
+                document.getElementById('login-card').classList.add('hidden'); 
+                document.getElementById('dashboard-card').classList.remove('hidden'); 
+                document.getElementById('user-name').innerText = data.user.name; 
+                loadStudentResults();
+            } else { 
+                document.getElementById('auth-feedback').innerText = "Access Denied: Invalid Student Credentials or role mismatch."; 
+            }
+        }
+
+        async function loadStudentResults() {
+            const res = await fetch(`${API_URL}/results`, { 
+                headers: { 'Authorization': `Bearer ${token}` } 
+            });
+            const data = await res.json(); 
+            const list = document.getElementById('student-results-list'); 
+            list.innerHTML = "";
+            
+            if(data.length === 0) {
+                list.innerHTML = "<li>No academic records published yet for your profile.</li>";
+                return;
+            }
+
+            data.forEach(r => { 
+                list.innerHTML += `<li><span>📋 <b>Course Code: ${r.course_id}</b></span><span style="background:#f0fdf4; color:#166534; padding:6px 12px; border-radius:8px; font-weight:800; border:1px solid #bbf7d0;">Grade: ${r.grade_letter} (${r.grade_point})</span></li>`; 
+            });
+        }
+
+        async function downloadPdf() {
+            if (!token) {
+                alert("Session token missing. Please log in again.");
+                return;
+            }
+            try {
+                const res = await fetch(`${API_URL}/slips/download-slip`, {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!res.ok) {
+                    const errData = await res.json();
+                    alert(`Download failed: ${errData.error}`);
+                    return;
+                }
+                const blob = await res.blob();
+                const fileUrl = window.URL.createObjectURL(blob);
+                const downloadLink = document.createElement('a');
+                downloadLink.href = fileUrl;
+                downloadLink.download = `Official_Exam_Slip.pdf`;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                window.URL.revokeObjectURL(fileUrl);
+            } catch (error) {
+                console.error("PDF Download Error:", error);
+                alert("An error occurred while compiling your dynamic printable PDF slip.");
+            }
+        }
+    </script>
+</body>
+</html>

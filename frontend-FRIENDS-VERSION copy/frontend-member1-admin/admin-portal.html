@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - Cream Edition</title>
+    <!-- Import Google Fonts: Shrikhand (Untuk Tajuk sahaja) & League Spartan (Untuk teks lain) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;800;900&family=Shrikhand&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            --primary: #cefc00; 
+            --bg: #fef08a; 
+            --card: #363333; 
+            --text: #0a0a0a; 
+            --text-muted: #6c5a6b; 
+            --border: #626a74; 
+            --accent: #0ea5e9; 
+            --accent-hover: #0284c7; 
+        }
+
+        /* Setkan font League Spartan untuk SELURUH ELEMEN KECUALI TAJUK UTAMA */
+        body, input, select, button, h3, h4, span, li, p { 
+            font-family: 'League Spartan', sans-serif; 
+            color: var(--text); 
+        }
+
+        body { 
+          margin: 0; 
+    padding: 40px 20px; 
+    background-image: url('BACKGROUND.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-size: 18px; 
+    min-height: 100vh;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        /* CSS TAJUK UTAMA: Menggunakan Font SHRIKHAND khusus & Animasi Bergerak */
+        .title-wrapper { 
+            width: 100%; 
+            overflow: hidden; 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+        
+        h1 { 
+            font-family: 'Shrikhand', cursive, sans-serif !important; /* Kekalkan Shrikhand untuk Tajuk */
+            font-style: italic; 
+            color: #f7f7f7; 
+            font-size: 50px; 
+            font-weight: 400; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 14px; 
+            margin: 0;
+            letter-spacing: 1px; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15); 
+            animation: moveLeftRight 6s ease-in-out infinite alternate; 
+        }
+
+        @keyframes moveLeftRight {
+            0% { transform: translateX(-8%); }
+            100% { transform: translateX(8%); }
+        }
+
+        /* Styling Elemen Portal (Menggunakan League Spartan) */
+        .card { 
+            background: var(--card); 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+            border: 1px solid var(--border); 
+            margin-bottom: 25px; 
+        }
+
+        .card h3 { font-size: 26px; margin-top: 0; color: var(--primary); margin-bottom: 20px; font-weight: 700; }
+        .card h4 { font-size: 22px; margin-top: 0; color: var(--primary); margin-bottom: 15px; font-weight: 700; }
+
+        .auth-container { max-width: 450px; margin: 60px auto; }
+
+        input, select { 
+            box-sizing: border-box; 
+            width: 100%; 
+            padding: 12px 16px; 
+            margin: 8px 0 16px 0; 
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            font-size: 18px; 
+            font-weight: 600;
+            background: #fff; 
+            color: var(--text); 
+        }
+
+        input:focus, select:focus { 
+            outline: none; 
+            border-color: var(--accent); 
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); 
+        }
+
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background: var(--primary); 
+            color: rgb(3, 3, 3); 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 18px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+        }
+
+        button:hover { background: #334155; transform: translateY(-1px); }
+        .logout-btn { max-width: 220px; background: #ff0202; color: white; margin-top: 10px; }
+        .logout-btn:hover { background: #dc2626; }
+
+        .flex-container { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        @media(min-width: 768px) { .flex-container { grid-template-columns: 1fr 1fr; } }
+        
+        .hidden { display: none; }
+        hr { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
+        
+        ul { padding: 0; margin: 0; list-style: none; }
+        
+        li { 
+            background: #fbfbfb; 
+            padding: 16px; 
+            border-radius: 8px; 
+            margin-bottom: 12px; 
+            border: 1px solid var(--border); 
+            border-left: 5px solid var(--accent); 
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px; 
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .list-btn { 
+            background: #ffc107; 
+            color: #0f172a; 
+            width: auto; 
+            align-self: flex-start; 
+            padding: 6px 14px; 
+            font-size: 16px; 
+            font-weight: 700;
+            margin-top: 8px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+        }
+
+        .list-btn:hover { background: #e0a800; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tajuk Utama Beranimasi Menggunakan Font Shrikhand -->
+        <div class="title-wrapper">
+            <h1>⚙️ Administrator Control Center</h1>
+        </div>
+        
+        <!-- Kad Log Masuk (Menggunakan Font League Spartan) -->
+        <div id="login-card" class="card auth-container">
+            <h3>Portal Admin Authentication</h3>
+            <input type="email" id="email" value="admin@uptm.edu.my">
+            <input type="password" id="password" value="hashed_admin_pass">
+            <button onclick="handleLogin()">Secure Login</button>
+            <p id="auth-feedback" style="color:#fe0000; font-size:16px; margin-top:10px; font-weight:600;"></p>
+        </div>
+
+        <!-- Dashboard Admin (Menggunakan Font League Spartan) -->
+        <div id="dashboard-card" class="card hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <h3 style="margin: 0;">Welcome System Admin: <span id="user-name" style="color: var(--accent);"></span></h3>
+                <button onclick="location.reload()" class="logout-btn">Terminate Session</button>
+            </div>
+            <hr>
+
+            <div class="flex-container">
+                <div>
+                    <h4>Schedule a New Examination</h4>
+                    <input type="text" id="courseId" placeholder="Course Code (e.g. SWC3633)">
+                    <input type="date" id="examDate">
+                    <input type="time" id="startTime">
+                    <input type="text" id="venue" placeholder="Venue Location">
+                    <button onclick="createExam()">Commit Schedule Item</button>
+                    
+                    <h4 style="margin-top: 30px;">Current System Exam Timetables</h4>
+                    <ul id="exams-list"></ul>
+                </div>
+
+                <div style="border-left: 1px solid var(--border); padding-left: 20px;">
+                    <h4>Edit System User Account</h4>
+                    <input type="number" id="editUserId" placeholder="Target User ID to Edit" readonly style="background: #e2e8f0; cursor: not-allowed; color: var(--text-muted);">
+                    <input type="text" id="editName" placeholder="Full Name">
+                    <input type="email" id="editEmail" placeholder="University Email Address">
+                    <select id="editRole">
+                        <option value="Lecturer">Lecturer</option>
+                        <option value="Student">Student</option>
+                    </select>
+                    <button onclick="updateUser()" style="background: #03f75c; color: rgb(6, 6, 6);">Save Profile Modifications</button>
+                    <button onclick="clearUserForm()" style="background: #71a8f4; color: rgb(0, 0, 0); margin-top: 8px;">Clear Selection</button>
+
+                    <h4 style="margin-top: 30px;">Registered Directory</h4>
+                    <ul id="users-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:3000/api"; let token = "";
+        async function handleLogin() {
+            const res = await fetch(`${API_URL}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: document.getElementById('email').value, password: document.getElementById('password').value }) });
+            const data = await res.json();
+            if(res.ok && data.user.role === 'Administrator') {
+                token = data.token; document.getElementById('login-card').classList.add('hidden'); document.getElementById('dashboard-card').classList.remove('hidden'); document.getElementById('user-name').innerText = data.user.name; loadExams(); loadUsers();
+            } else { document.getElementById('auth-feedback').innerText = "Access Denied: Account privilege mismatch."; }
+        }
+        async function loadExams() {
+            const res = await fetch(`${API_URL}/examinations`, { headers: { 'Authorization': `Bearer ${token}` } });
+            const data = await res.json(); const list = document.getElementById('exams-list'); list.innerHTML = "";
+            data.forEach(e => { list.innerHTML += `<li><strong>${e.course_id}</strong><span>📅 Date: ${e.exam_date.split('T')[0]}</span><span>⏰ Time: ${e.start_time} | 📍 Venue: ${e.venue}</span></li>`; });
+        }
+        async function createExam() {
+            const res = await fetch(`${API_URL}/examinations`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ course_id: document.getElementById('courseId').value, exam_date: document.getElementById('examDate').value, start_time: document.getElementById('startTime').value, venue: document.getElementById('venue').value }) });
+            if(res.ok) { alert('Exam Created Successfully!'); loadExams(); } else { alert('Error creating exam schedule.'); }
+        }
+        async function loadUsers() {
+            const res = await fetch(`${API_URL}/users`, { headers: { 'Authorization': `Bearer ${token}` } });
+            const data = await res.json(); const list = document.getElementById('users-list'); list.innerHTML = "";
+            data.forEach(u => { list.innerHTML += `<li><span><strong>[ID: ${u.user_id}] ${u.name}</strong> (${u.role})</span><span style="font-size:15px; color:#475569;">📧 ${u.email}</span><button class="list-btn" onclick="selectUserForEdit(${u.user_id}, '${u.name.replace(/'/g, "\\'")}', '${u.email}', '${u.role}')">Select to Edit</button></li>`; });
+        }
+        function selectUserForEdit(id, name, email, role) { document.getElementById('editUserId').value = id; document.getElementById('editName').value = name; document.getElementById('editEmail').value = email; document.getElementById('editRole').value = role; }
+        function clearUserForm() { document.getElementById('editUserId').value = ""; document.getElementById('editName').value = ""; document.getElementById('editEmail').value = ""; }
+        async function updateUser() {
+            const id = document.getElementById('editUserId').value; if(!id) return alert('Please click "Select to Edit" first.');
+            const res = await fetch(`${API_URL}/users/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({ name: document.getElementById('editName').value, email: document.getElementById('editEmail').value, role: document.getElementById('editRole').value }) });
+            if(res.ok) { alert('User Account Updated Successfully!'); clearUserForm(); loadUsers(); } else { const err = await res.json(); alert(`Error: ${err.error}`); }
+        }
+    </script>
+</body>
+</html>

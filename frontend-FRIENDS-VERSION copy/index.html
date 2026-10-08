@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPTM Exam Portal Gateway - Canva Styled Edition</title>
+    <!-- Import Font Canva: Archivo Black (Bernoru Style), Anton (Canva Sans Style), Open Sans (Open Sauce Style) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Open+Sans:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            /* Menggunakan gambar yellow.jpg sebagai latar belakang */
+            --bg-image: url('yellow.jpg'); 
+            --card: #ff4de7; /* Kotak magenta/pink Canva */
+            --text: #ffffff; 
+            --text-muted: #f1f5f9; 
+            --border: #ffffff; 
+            --accent: #0ea5e9; 
+        }
+
+        body { 
+            font-family: 'Open Sans', 'Segoe UI', sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            
+            /* Tetapan Background Image yellow.jpg Penuh */
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #fef08a; /* Warna fallback jika gambar tiada */
+
+            color: var(--text); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            box-sizing: border-box;
+        }
+
+        /* Kotak Merah Jambu/Purple Canva Dibesarkan */
+        .gateway-container { 
+            text-align: center; 
+            background: var(--card); 
+            padding: 55px 45px; 
+            border-radius: 28px; 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); 
+            max-width: 950px; 
+            width: 95%; 
+            border: 2px solid rgba(255, 255, 255, 0.3); 
+            overflow: hidden; /* Elak ruang berlebih semasa tajuk bergerak */
+        }
+
+        /* Tajuk Utama (Nama Universiti) - BERGERAK KIRI KE KANAN */
+        h1 { 
+            font-family: 'Archivo Black', 'Bernoru', sans-serif;
+            color: #ffffff; 
+            margin-top: 0;
+            margin-bottom: 12px; 
+            font-size: 38px; 
+            font-weight: 900; 
+            letter-spacing: 0.5px; 
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+            display: inline-block; /* Diperlukan untuk animasi transform */
+
+            /* Animasi Gerak Kiri ke Kanan Berterusan */
+            animation: slideLeftRight 3s ease-in-out infinite alternate;
+        }
+
+        /* Keyframes Animasi Pergerakan Tajuk Universiti */
+        @keyframes slideLeftRight {
+            0% {
+                transform: translateX(-25px);
+            }
+            100% {
+                transform: translateX(25px);
+            }
+        }
+
+        /* Subtajuk / Detail Header */
+        p { 
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            color: var(--text-muted); 
+            margin-bottom: 45px; 
+            font-size: 18px; 
+            letter-spacing: -0.2px;
+        }
+
+        .role-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+        }
+
+        @media(min-width: 768px) { 
+            .role-grid { 
+                grid-template-columns: repeat(3, 1fr); 
+            } 
+        }
+
+        /* Kad Peranan (Role Tile) - STATIK */
+        .role-card { 
+            background: #ffffff; 
+            border: 2px solid var(--border); 
+            padding: 35px 20px; 
+            border-radius: 18px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            display: block; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Hover Kesan Membesar Sedikit Sahaja */
+        .role-card:hover { 
+            transform: translateY(-5px) scale(1.03); 
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); 
+        }
+
+        .role-icon { 
+            font-size: 54px; 
+            margin-bottom: 16px; 
+            display: block; 
+        }
+
+        /* Font Perkataan Role (ADMINISTRATOR, LECTURER, STUDENT) - Gaya Canva Sans / Anton */
+        .role-title { 
+            font-family: 'Anton', 'Canva Sans', sans-serif;
+            font-weight: 700; 
+            color: #0f172a; 
+            font-size: 24px; 
+            display: block; 
+            margin-bottom: 10px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Font Detail Role - Gaya Open Sauce (Open Sans SemiBold) */
+        .role-desc { 
+            font-family: 'Open Sans', 'Open Sauce', sans-serif;
+            font-weight: 600;
+            font-size: 14px; 
+            color: #475569; 
+            display: block; 
+            line-height: 1.5; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gateway-container">
+        <!-- Tajuk yang bergerak kiri ke kanan secara berterusan -->
+        <h1>UNIVERSITI POLY-TECH MALAYSIA</h1>
+        
+        <p>Exam Scheduling & Result Management System — Select Your Access Tier</p>
+        
+        <div class="role-grid">
+            <a href="frontend-member1-admin/admin-portal.html" class="role-card">
+                <span class="role-icon">🔒</span>
+                <span class="role-title">ADMINISTRATOR</span>
+                <span class="role-desc">Manage schedules & user account entries</span>
+            </a>
+
+            <a href="frontend-member2-lecturer/lecturer-view.html" class="role-card">
+                <span class="role-icon">👩‍🏫</span>
+                <span class="role-title">LECTURER</span>
+                <span class="role-desc">Input academic grades & review student logs</span>
+            </a>
+
+            <a href="frontend-member3-student/student-slip.html" class="role-card">
+                <span class="role-icon">🎓</span>
+                <span class="role-title">STUDENT</span>
+                <span class="role-desc">View performance results & print PDF slips</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

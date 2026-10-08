@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturer Workspace - UPTM Portal</title>
+    
+    <!-- Import Font Montserrat & Open Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            --bg-image: url('PURPLE.png');
+            --card-bg: #00026d; /* Warna kelabu gelap seperti paparan Admin */
+            --accent-yellow: #03fb30; 
+            --accent-green: #f1fe00; /* Warna hijau terang untuk label/tajuk Admin */
+            --text-light: #ffffff;
+            --text-dark: #000003;
+        }
+
+        body { 
+            font-family: 'Montserrat', 'Open Sans', Arial, sans-serif; 
+            margin: 0; 
+            padding: 40px 20px; 
+            
+            /* Latar Belakang File yellow.jpg */
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #fef08a;
+
+            color: #ffffff; 
+            min-height: 100vh;
+            box-sizing: border-box;
+            overflow-x: hidden; 
+        }
+
+        .container { 
+            max-width: 1100px; /* Lebarkan bekas utama mengikut gambar Admin */
+            margin: 0 auto; 
+            text-align: center;
+        }
+
+        /* ----------------------------------------------------
+           ANIMASI TAJUK: BERGERAK KIRI KE KANAN secara berterusan
+           ---------------------------------------------------- */
+        .page-title { 
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-weight: 900;
+            font-size: 42px;
+            color: #ffffff; 
+            text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.4);
+            margin-bottom: 35px; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 15px; 
+            animation: moveLeftToRight 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveLeftToRight {
+            0% {
+                transform: translateX(-30px);
+            }
+            100% {
+                transform: translateX(30px);
+            }
+        }
+
+        /* Kotak Utama / Card Tema Kelabu Gelap Admin */
+        .card { 
+            background: var(--card-bg); 
+            padding: 35px 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.35); 
+            margin-bottom: 25px; 
+            text-align: left;
+        }
+
+        .auth-container { 
+            max-width: 480px; 
+            margin: 40px auto; 
+            padding: 40px 35px;
+        }
+
+        .auth-container h3 { 
+            color: var(--accent-green);
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        /* Input Mengikut Gaya Admin */
+        input { 
+            box-sizing: border-box; 
+            width: 100%; 
+            padding: 12px 16px; 
+            margin: 8px 0 18px 0; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            font-size: 15px; 
+            font-weight: 700;
+            background: #ffffff; 
+            color: #000000; 
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Butang Login */
+        .auth-container button { 
+            width: 100%; 
+            padding: 14px; 
+            background: var(--accent-yellow); 
+            color: #000000; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            margin-top: 10px;
+        }
+
+        .auth-container button:hover { 
+            opacity: 0.9;
+            transform: translateY(-2px); 
+            box-shadow: 0 5px 15px rgba(204, 255, 0, 0.4);
+        }
+
+        /* Gaya Dashboard Dalam */
+        .card h3 { 
+            margin-top: 0; 
+            color: var(--accent-green); 
+            font-weight: 800; 
+            font-size: 24px;
+        }
+
+        .card h4 {
+            color: var(--accent-green);
+            font-weight: 800;
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* Butang Hijau Terang Gaya Admin */
+        .btn-action {
+            width: 100%; 
+            padding: 14px; 
+            background: #00ff66; 
+            color: #000000; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            transition: all 0.2s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-action:hover {
+            background: #00cc52;
+            transform: translateY(-1px);
+        }
+
+        /* Butang Red Terminate Session / Logout */
+        .logout-btn { 
+            max-width: 180px; 
+            padding: 12px 20px;
+            background: #ff0000; 
+            color: white; 
+            border: none;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .logout-btn:hover { 
+            background: #cc0000; 
+        }
+
+        .hidden { 
+            display: none !important; 
+        }
+
+        hr { 
+            border: 0; 
+            border-top: 1px solid #555555; 
+            margin: 20px 0; 
+        }
+
+        ul { 
+            padding: 0; 
+            margin: 0; 
+            list-style: none; 
+        }
+
+        li { 
+            background: #ffffff; 
+            color: #000000;
+            padding: 16px; 
+            border-radius: 8px; 
+            margin-bottom: 12px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            font-weight: 700;
+        }
+
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 20px; 
+        }
+
+        @media(min-width: 768px) { 
+            .form-grid { 
+                grid-template-columns: 1fr 1fr; 
+            } 
+        }
+
+        label {
+            font-size: 14px; 
+            font-weight: 800; 
+            color: var(--accent-green);
+            display: block;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tajuk Utama -->
+        <h1 class="page-title"><span>👩‍🏫</span> Faculty Lecturer Grading Deck</h1>
+        
+        <!-- Kotak Authentication Login -->
+        <div id="login-card" class="card auth-container">
+            <h3>Portal Lecturer Authentication</h3>
+            <label style="color:#ffffff;">Email Address</label>
+            <input type="email" id="email" value="siti@uptm.edu.my" placeholder="Email Address">
+            
+            <label style="color:#ffffff;">Password</label>
+            <input type="password" id="password" value="hashed_lecturer_pass" placeholder="Password">
+            
+            <button onclick="handleLogin()">Secure Login</button>
+            <p id="auth-feedback" style="color:#ff6666; font-size:14px; margin-top:15px; font-weight:700; text-align:center;"></p>
+        </div>
+
+        <!-- Dashboard Lecturer (Gaya Admin Panel) -->
+        <div id="dashboard-card" class="card hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin:0;">Welcome Lecturer: <span id="user-name" style="color:#ffffff;"></span></h3>
+                <button onclick="location.reload()" class="logout-btn">Terminate Session</button>
+            </div>
+            <hr>
+            
+            <div class="form-grid">
+                <!-- Lajur Kiri: Input Result Pelajar -->
+                <div>
+                    <h4>Input New Student Academic Result</h4>
+                    
+                    <label>Student ID Reference</label>
+                    <input type="number" id="studentId" placeholder="e.g. 4">
+
+                    <label>Course Code</label>
+                    <input type="text" id="courseId" placeholder="e.g. SWC3633">
+
+                    <label>Grade Point</label>
+                    <input type="number" step="0.01" id="gradePoint" placeholder="e.g. 4.00">
+
+                    <label>Grade Letter</label>
+                    <input type="text" id="gradeLetter" placeholder="e.g. A">
+
+                    <button class="btn-action" onclick="submitGrade()" style="margin-top: 10px;">Commit Marks Entry</button>
+                </div>
+
+                <!-- Lajur Kanan: Senarai Log Keputusan -->
+                <div>
+                    <h4>Grading Log Indexes</h4>
+                    <ul id="results-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:3000/api"; 
+        let token = "";
+
+        async function handleLogin() {
+            try {
+                const res = await fetch(`${API_URL}/auth/login`, { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify({
+                        email: document.getElementById('email').value, 
+                        password: document.getElementById('password').value
+                    }) 
+                });
+                const data = await res.json();
+                
+                if (res.ok && data.user && data.user.role === 'Lecturer') {
+                    token = data.token; 
+                    document.getElementById('login-card').classList.add('hidden'); 
+                    document.getElementById('dashboard-card').classList.remove('hidden'); 
+                    document.getElementById('user-name').innerText = data.user.name; 
+                    loadResults();
+                } else { 
+                    document.getElementById('auth-feedback').innerText = "Access Denied: Invalid Lecturer Account."; 
+                }
+            } catch (err) {
+                console.error("Login error:", err);
+                document.getElementById('auth-feedback').innerText = "Server Connection Failed.";
+            }
+        }
+
+        async function loadResults() {
+            try {
+                const res = await fetch(`${API_URL}/results`, { 
+                    headers: { 'Authorization': `Bearer ${token}` } 
+                });
+                const data = await res.json(); 
+                const list = document.getElementById('results-list'); 
+                list.innerHTML = "";
+
+                if (Array.isArray(data)) {
+                    data.forEach(r => { 
+                        list.innerHTML += `
+                            <li>
+                                <span>👨‍🎓 Student ID: <strong>${r.student_id}</strong> | 📘 Course: <strong>${r.course_id}</strong></span>
+                                <span style="background:#e0f2fe; color:#0369a1; padding:6px 12px; border-radius:6px; font-weight:800;">Grade: ${r.grade_letter} (${r.grade_point})</span>
+                            </li>`; 
+                    });
+                }
+            } catch (err) {
+                console.error("Error loading results:", err);
+            }
+        }
+
+        async function submitGrade() {
+            try {
+                const res = await fetch(`${API_URL}/results`, { 
+                    method: 'POST', 
+                    headers: { 
+                        'Content-Type': 'application/json', 
+                        'Authorization': `Bearer ${token}`
+                    }, 
+                    body: JSON.stringify({
+                        student_id: document.getElementById('studentId').value, 
+                        course_id: document.getElementById('courseId').value, 
+                        grade_point: document.getElementById('gradePoint').value, 
+                        grade_letter: document.getElementById('gradeLetter').value
+                    }) 
+                });
+
+                if (res.ok) { 
+                    alert('Student Marks Published!'); 
+                    loadResults(); 
+                } else { 
+                    alert('Error recording grades.'); 
+                }
+            } catch (err) {
+                console.error("Error submitting grade:", err);
+                alert('Server Connection Error.');
+            }
+        }
+    </script>
+</body>
+</html>
